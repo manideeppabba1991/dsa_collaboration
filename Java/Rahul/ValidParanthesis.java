@@ -31,13 +31,25 @@
 
 //first checking if a string is valid or not
 
- public class Main {
+
+ public class ManiTest {
   public static void main(String[] args) {
   
     String x = "()[]{}";
+    
+    if(isValidStr(x)){
+    	System.out.println("Valid");
+    }else{
+    	System.out.println("InValid");
+    }
+	
+  }
+  
+  public static boolean isValidStr(String x){
+ 
 	int len = x.length();
 	if(!x.matches("[()\\[\\]{}]+") || (x.length()<1 || x.length()>104) || x.length() %2 	!= 0){
-    	System.out.println("InValid");
+    	return false;
 	}
     String inChar = "[{(";
 	StringBuffer inptSide = new StringBuffer((len/2)+1); 
@@ -49,7 +61,7 @@
         else{
         	if(inptSide.length()<1){
             	System.out.println("InValid");
-                return;
+                return false;
             }
             char lft = inptSide.charAt(inptSide.length()-1);
 
@@ -60,9 +72,9 @@
         }
 	}
     if(inptSide.length()>0){
-    	System.out.println("InValid");
+    	return false;
     }else{
-    	System.out.println("Valid");
+    	return true;
     }
   }
 }
