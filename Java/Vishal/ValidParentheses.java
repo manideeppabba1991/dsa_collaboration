@@ -68,3 +68,33 @@ Boolean SampleProblem(String input) {
         }
         return outPut;
     }
+
+
+void SampleProblem(String input) {
+        boolean result = true;
+        List<Boolean> booleanOutput = new ArrayList<>();
+        if(input != null) {
+           booleanOutput =  inputString(input, booleanOutput);
+           result = !booleanOutput.contains(false);
+           log.info("result" + result);
+        }
+    }
+
+    private List<Boolean> inputString(String input, List<Boolean> booleanList) {
+            for(int i=0; i<input.length()-1; i++) {
+                String nextChar = String.valueOf(input.charAt(i + 1));
+                if(("(".equalsIgnoreCase(String.valueOf(input.charAt(i))) && ")".equalsIgnoreCase(nextChar))
+                        || ("[".equalsIgnoreCase(String.valueOf(input.charAt(i))) && "]".equalsIgnoreCase(nextChar))
+                        || ("{".equalsIgnoreCase(String.valueOf(input.charAt(i))) && "}".equalsIgnoreCase(nextChar))) {
+                    input = input.substring(0, i) + input.substring(i + 2);
+                    booleanList.add(true);
+                } else {
+                    booleanList.add(false);
+                }
+                return inputString(input, booleanList);
+            }
+        if(input.length() == 1) {
+            booleanList.add(false);
+        }
+        return booleanList;
+    }
