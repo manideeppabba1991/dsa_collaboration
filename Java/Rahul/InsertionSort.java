@@ -1,3 +1,6 @@
+//time complexity = ne
+//space constant
+
 /* Online Java Compiler and Editor */
 public class InsertionSort{
 
@@ -18,6 +21,7 @@ public class InsertionSort{
                     int temp = input[i-1];
                     input[i-1] = input[i];
                     input[i] = temp;
+                    continue;
                 }
             }
         }
