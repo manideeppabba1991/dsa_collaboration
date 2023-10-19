@@ -21,8 +21,10 @@ public class InsertionSort{
                     int temp = input[i-1];
                     input[i-1] = input[i];
                     input[i] = temp;
-                    continue;
                 }
+               else{
+                    break;
+               }
             }
         }
         return input;
