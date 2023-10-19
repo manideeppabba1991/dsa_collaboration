@@ -1,0 +1,60 @@
+// time complexity is logn
+// space is constant
+
+/* Online Java Compiler and Editor */
+public class InsertionSort{
+
+     public static void main(String []args){
+         int[] input = new int[]{1,3};
+         int x = searchInsert(input,0);
+          System.out.println("found:"+ x);
+     }
+     
+     public static int searchInsert(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length -1;
+        while(left <= right){
+            int mid = (int) Math.floor((left+right)/2);
+            if(target == nums[mid]){
+                return mid;
+            }else if(target< nums[mid]){
+                right = mid-1;
+            }
+            else{
+                left = mid+1;
+            }
+        }
+         return left;
+    }
+}
+
+// tried multiple things
+//with extra result varible and trying to return that, found multiple issues when left = right and not going into loop
+// later tried equal and i was close, but few edge case when i need to insert at start, faced few issues, so took some external help and 
+// saw my left value better matched
+/*
+  public int searchInsert(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length -1;
+        int result = 0;
+        while(left < right){
+            int mid = (int) Math.floor((left+right)/2);
+            if(target == nums[mid]){
+                return mid;
+            }else if(target< nums[mid]){
+                right = mid-1;
+                result = right;
+            }
+            else{
+                left = mid+1;
+                result = left;
+            }
+        }
+        if(target>nums[result]){
+            return result+1;
+        }
+        else{
+            return result;
+        }
+    }
+*/
