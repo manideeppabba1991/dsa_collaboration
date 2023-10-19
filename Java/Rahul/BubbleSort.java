@@ -1,3 +1,6 @@
+//time complexity n2
+//space complexity constant
+
 public class BubbleSort{
 
      public static void main(String []args){
