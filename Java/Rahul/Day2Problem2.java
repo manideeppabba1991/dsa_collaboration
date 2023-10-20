@@ -1,3 +1,5 @@
+//tiem complexity = nlogn
+
 class Solution {
     public int shipWithinDays(int[] nums, int target) {
         int left = 0;
