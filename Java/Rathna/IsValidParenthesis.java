@@ -1,6 +1,6 @@
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {
+public class IsValidParenthesis {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter a string: ");
@@ -8,71 +8,7 @@ public class Main {
         System.out.println("Contents of input string: " + inputStr);
         IsValidParenthesis(inputStr);
         scan.close();
-
-
-        int[] unsortedArray = {29, 10, 14, 30, 37, 14, 18};
-        sortUsingBubbleSortTech(unsortedArray);
-        sortUsingSelectionSortTech(unsortedArray);
-        sortUsingInsertionSortTech(unsortedArray);
     }
-
-    private static void sortUsingInsertionSortTech(int[] unsortedArray) {
-        for(int j = 1; j < unsortedArray.length ; j++) { //Total TC = O(n^2)
-            for(int i = j - 1; i >= 0; i--){ //Total SC = O(1)
-                if(unsortedArray[j] < unsortedArray[i])
-                {
-                    int temp = unsortedArray[j];
-                    unsortedArray[j] = unsortedArray[i];
-                    unsortedArray[i] = temp;
-                }
-            }
-        }
-        System.out.print("Sorted array values are: ");
-        for (int i: unsortedArray) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-    }
-
-    private static void sortUsingSelectionSortTech(int[] unsortedArray) {
-        for(int i = 0; i < unsortedArray.length; i++) {
-            int min = i;
-            for(int j = i+1; j < unsortedArray.length; j++) { //Total TC = O(n^2)
-                if(unsortedArray[j] < unsortedArray[min]) { //Total SC = O(1)
-                    min = j;
-                }
-            }
-            if(i != min) {
-                int temp = unsortedArray[i];
-                unsortedArray[i] = unsortedArray[min];
-                unsortedArray[min] = temp;
-            }
-        }
-        System.out.print("Sorted array values are: ");
-        for (int i: unsortedArray) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-    }
-
-    private static void sortUsingBubbleSortTech(int[] unsortedArray) {
-
-        for(int j = unsortedArray.length - 1; j > 0 ; j--){  // TC: O(n)
-            for(int i = 0; i < j; i++) { // TC: O(n)
-                if(unsortedArray[i] > unsortedArray[i+1]) { // Total TC = O(n^2)
-                    int temp = unsortedArray[i];
-                    unsortedArray[i] = unsortedArray[i+1]; // SC = O(1), since only array is used
-                    unsortedArray[i+1] = temp;
-                }
-            }
-        }
-        System.out.print("Sorted array values are: ");
-        for (int i: unsortedArray) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-    }
-
     private static void IsValidParenthesis(String inputStr) {
 
         if(inputStr.length() > 1 && inputStr.length() <= 104 && inputStr.length() % 2 == 0)
@@ -84,8 +20,8 @@ public class Main {
         char [] validChars = {'(', ')', '[', ']', '{', '}'};
         for(int i = 0; i < inputStr.length(); i++) {
             if(inputStr.charAt(i) == validChars[0] || inputStr.charAt(i) == validChars[1]
-            || inputStr.charAt(i) == validChars[2] || inputStr.charAt(i) == validChars[3]
-            || inputStr.charAt(i) == validChars[4] || inputStr.charAt(i) == validChars[5]) {
+                    || inputStr.charAt(i) == validChars[2] || inputStr.charAt(i) == validChars[3]
+                    || inputStr.charAt(i) == validChars[4] || inputStr.charAt(i) == validChars[5]) {
                 System.out.println("Valid - Input string have a valid char: " + inputStr.charAt(i) + " at position: " + i);
             }
             else {
