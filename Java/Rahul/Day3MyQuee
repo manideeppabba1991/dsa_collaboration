@@ -1,0 +1,69 @@
+public class MyQuee {
+
+    int[] initial;
+    int size;
+    public MyQuee(int inSz){
+        initial = new int[inSz];
+    }
+    public MyQuee(){
+        this(10);
+    }
+    public int size(){
+        return size;
+    }
+    public boolean isEmpty(){
+        if(size>0)
+            return true;
+        return false;
+    }
+
+    public boolean contains(int o){
+        for(int i =0; i<size;i++){
+            if(o== initial[i])
+                return true;
+        }
+        return false;
+    }
+
+    public int remove() throws Exception {
+        if(size ==0){
+            throw new Exception("Quee empty");
+        }
+        int[] newIn = new int[initial.length];
+        int val= initial[0];
+        System.arraycopy(initial, 1, newIn, 0,size-1);
+        size = size-1;
+        return val;
+    }
+    public int poll(){
+        if(size ==0){
+            return -1;
+        }
+        int[] newIn = new int[initial.length];
+        int val= initial[0];
+        System.arraycopy(initial, 1, newIn, 0,size-1);
+        size = size-1;
+        return val;
+    }
+    public int peek(){
+        if(size ==0){
+            return -1;
+        }
+        return initial[0];
+    }
+    public void add(int e){
+        checkCapacity(1);
+        initial[size] = e;
+        size = size+1;
+    }
+
+    private void checkCapacity(int ne){
+        if(initial.length <= size+ne ){
+            int[] updated = new int[Math.max(initial.length*2,size+ne)];
+            // Copying elements of a[] to b[]
+            System.arraycopy(initial, 0, updated, 0,size);
+            initial = updated;
+        }
+    }
+
+}
