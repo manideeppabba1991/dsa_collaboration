@@ -1,3 +1,7 @@
+//feel like i am repeating most of the methods i did for arrayList
+
+//i think methods changed will be poll as it gets out the first in 
+
 public class MyQuee {
 
     int[] initial;
