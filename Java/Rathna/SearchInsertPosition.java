@@ -10,7 +10,7 @@ public class SearchInsertPosition {
         int left = 0;
         int right = sortedArray.length - 1;
 
-        while(left < right) {
+        while(left <= right) {
             int mid = (int) Math.floor((left + right)/2);
             System.out.println("Left = " + left + " Right = " + right + " Mid = " + mid);
             if(searchElement == sortedArray[mid]) {
@@ -21,12 +21,11 @@ public class SearchInsertPosition {
                 left = mid + 1;
             } else {
                 right = mid - 1;
-
             }
             System.out.println("Left = " + left + " Right = " + right + " Mid = " + mid);
         }
-
-        if(searchElement < sortedArray[left]) {
+        return left;
+/*        if(searchElement < sortedArray[left]) {
             return left;
         } else if(searchElement > sortedArray[left]) {
             return left + 1;
@@ -34,7 +33,7 @@ public class SearchInsertPosition {
             return left + 1;
         } else {
             return left;
-        }
+        }*/
 
     }
 }
