@@ -9,6 +9,9 @@ Constraints:
 Sentence contains English uppercase and lowercase letters, digits, and spaces.
 
 The order of the letters within a word is not to be reversed.
+
+time complexity = o(n)
+space o(n)
  */
 public class Day4Problem2 {
     public static void main(String[] args){
