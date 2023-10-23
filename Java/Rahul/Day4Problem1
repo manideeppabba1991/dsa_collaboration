@@ -1,6 +1,8 @@
 
 /*
 https://www.educative.io/courses/grokking-coding-interview-patterns-java/sort-colors
+time complexity = o(n)
+space constant
  */
 public class Day4Problem1 {
 
@@ -10,6 +12,7 @@ public class Day4Problem1 {
         for (int i: outputColors)
             System.out.println("position "+i );
     }
+
     private static int[] colorSort(int[] inputColors) {
         int left =0;
         int right = inputColors.length-1;
