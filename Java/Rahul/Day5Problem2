@@ -1,3 +1,7 @@
+//https://www.educative.io/courses/grokking-coding-interview-patterns-java/remove-all-adjacent-duplicates-in-string
+//time i think n.logn
+//space is o(n)
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
