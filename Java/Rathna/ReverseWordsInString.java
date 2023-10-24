@@ -10,7 +10,7 @@ public class ReverseWordsInString {
         String delimiter = " ";
 
         str = str.trim();
-        String[] strings = str.split(" ");
+        String[] strings = str.split("\\s+");
         int left = 0;
         int right = strings.length - 1;
         while(left < right) { //TC = O(n) and SC = O(1)
@@ -20,11 +20,6 @@ public class ReverseWordsInString {
             left++;
             right--;
         }
-        for(String s: strings) {
-            if(!s.isEmpty()) {
-                reverse += s + delimiter;
-            }
-        }
-        return reverse;
+        return String.join(" ", strings);
     }
 }
