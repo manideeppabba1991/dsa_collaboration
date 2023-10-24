@@ -1,0 +1,40 @@
+
+/*
+https://www.educative.io/courses/grokking-coding-interview-patterns-java/sort-colors
+time complexity = o(n)
+space constant
+ */
+public class Day4Problem1 {
+
+    public static void main(String[] args){
+        int[] inputColors = new int[]{1,0,2,1,2,2};
+        int[] outputColors = colorSort(inputColors);
+        for (int i: outputColors)
+            System.out.println("position "+i );
+    }
+
+    private static int[] colorSort(int[] inputColors) {
+        int left =0;
+        int right = inputColors.length-1;
+        int mid = 0;
+
+        while(mid <= right){
+            if(inputColors[mid] ==0 ){
+                int temp = inputColors[mid];
+                inputColors[mid] = inputColors[left];
+                inputColors[left] = temp;
+                left++;
+                mid++;
+            }else if(inputColors[mid] == 2){
+                int temp = inputColors[mid];
+                inputColors[mid] = inputColors[right];
+                inputColors[right] = temp;
+                right--;
+            }else{
+                mid++;
+            }
+
+        }
+        return inputColors;
+    }
+}
