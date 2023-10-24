@@ -18,7 +18,7 @@ public class Day4Problem1 {
         int right = inputColors.length-1;
         int mid = 0;
 
-        while(mid<right){
+        while(mid <= right){
             if(inputColors[mid] ==0 ){
                 int temp = inputColors[mid];
                 inputColors[mid] = inputColors[left];
