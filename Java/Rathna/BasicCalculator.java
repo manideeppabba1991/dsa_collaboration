@@ -16,18 +16,11 @@ public class BasicCalculator {
         for(int i = 0; i < exprsn.length(); i++) {
             if(Character.isDigit(exprsn.charAt(i))) {
                 formNumber = formNumber * 10 + Character.getNumericValue(exprsn.charAt(i));
-            } else if(exprsn.charAt(i) == '+') {
+            } else if(exprsn.charAt(i) == '+' || exprsn.charAt(i) == '-') {
                 number.push(formNumber);
                 signValue.push(exprsn.charAt(i));
                 formNumber = 0;
-            } else if(exprsn.charAt(i) == '-') {
-                number.push(formNumber);
-                signValue.push(exprsn.charAt(i));
-                formNumber = 0;
-            } else if (exprsn.charAt(i) =='(') {
-                signValue.push(exprsn.charAt(i));
-            } else if (exprsn.charAt(i) ==')') {
-                number.push(formNumber);
+            }  else if (exprsn.charAt(i) == '(' || exprsn.charAt(i) == ')') {
                 signValue.push(exprsn.charAt(i));
             }
 
