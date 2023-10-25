@@ -1,72 +1,63 @@
-import jdk.dynalink.Operation;
-
+//https://www.educative.io/courses/grokking-coding-interview-patterns-java/basic-calculator
+//time complexity = o(n)
+//space complexity = o(n)
 import java.util.Stack;
 
 public class Day5Problem1 {
     public static void main(String[] args){
-        String expression = "2183 - (612 + 499) + 137";
-        System.out.println( calculator(expression));
+        String expression = "(18 - 11 - (27 + 8 - 14) + 37)";
+        System.out.println( basicCalc(expression));
     }
+    
+    public static int basicCalc(String in){
+        Stack<Double> store = new Stack<>();
+        double cur =0;
+        int symbol = 1;//positive as 1
+        for(int i=0;i<in.length();i++){
+            //"2183 - (12+13) + 137";
+            if(Character.isDigit(in.charAt(i))){
+                cur = cur*10+ Character.getNumericValue(in.charAt(i)); //
+            }else if(in.charAt(i) == '+'){
+                store.push(cur*symbol);//
+                cur =0;
+                symbol =1;
 
-    private static int calculator(String expression) {
-        Stack<Integer> value = new Stack<>();
-        Stack<Character> operation = new Stack<>();
-        int output=0;
-        int cNumber=0;
+            }else if(in.charAt(i) == '-'){
+                store.push(cur*symbol);//
+                cur =0;
+                symbol =-1;
+            }else if(in.charAt(i)=='('){
+                if(symbol ==-1){
+                    store.push(Double.NEGATIVE_INFINITY);
+                }else{
+                    store.push(Double.POSITIVE_INFINITY);
+                }
+                symbol = 1;
 
-        for(int i = 0;i<expression.length();i++){
-            if(Character.isDigit(expression.charAt(i))){
-                cNumber = cNumber*10 + Character.getNumericValue(expression.charAt(i));
-            } else if (expression.charAt(i) =='+') {
-                if(cNumber !=0)
-                    value.push(cNumber);
-                operation.push(expression.charAt(i));
-                cNumber =0;
-            } else if(expression.charAt(i) == '-'){
-                if(cNumber !=0)
-                    value.push(cNumber);
-                operation.push(expression.charAt(i));
-                cNumber =0;
-            } else if (expression.charAt(i) =='(') {
-                operation.push(expression.charAt(i));
-            } else if (expression.charAt(i) ==')') {
+            }else if(in.charAt(i)==')'){
+                double out = cur*symbol;
+                symbol =1;
 
-                output = cNumber;
-
-                while(!operation.isEmpty() && operation.peek() !='('){
-                    if(operation.pop() =='-'){
-                        output = output*-1;
-                    }
-                    output = output+value.pop();
+                //"2183 - (12+13) + 137";
+                while(!store.isEmpty() && store.peek() != Double.NEGATIVE_INFINITY && store.peek() != Double.POSITIVE_INFINITY){
+                    out+= store.pop();
+                    if(store.peek() == Double.NEGATIVE_INFINITY )
+                        out = -1*out;
 
                 }
-                value.push(output);
-
-                operation.pop();
-                output =0;
-                cNumber =0;
-            }
-            if(i == expression.length()-1){
-                value.push(cNumber);
+                store.pop();
+                cur = out;
             }
         }
 
-        System.out.println(value);
-        System.out.println(operation);
-        while(!operation.isEmpty() && operation.peek() !='('){
-
-            System.out.println(output);
-            System.out.println(value);
-            System.out.println(operation);
-
-            output = output+value.pop();
-            if(operation.pop() =='-'){
-                output = output*-1;
-            }
-
+        if(cur >0){
+            store.push(cur*symbol);
         }
-        System.out.println(value);
-        output+=value.pop();
-        return output;
+        int result =0;
+        while(!store.isEmpty()){
+            result+= store.pop();
+        }
+
+        return  result;
     }
 }
