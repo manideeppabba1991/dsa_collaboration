@@ -1,3 +1,5 @@
+import jdk.dynalink.Operation;
+
 import java.util.Stack;
 
 public class Day5Problem1 {
@@ -16,22 +18,27 @@ public class Day5Problem1 {
             if(Character.isDigit(expression.charAt(i))){
                 cNumber = cNumber*10 + Character.getNumericValue(expression.charAt(i));
             } else if (expression.charAt(i) =='+') {
-                value.push(cNumber);
+                if(cNumber !=0)
+                    value.push(cNumber);
                 operation.push(expression.charAt(i));
                 cNumber =0;
             } else if(expression.charAt(i) == '-'){
-                value.push(cNumber);
+                if(cNumber !=0)
+                    value.push(cNumber);
                 operation.push(expression.charAt(i));
                 cNumber =0;
             } else if (expression.charAt(i) =='(') {
                 operation.push(expression.charAt(i));
             } else if (expression.charAt(i) ==')') {
-                value.push(cNumber);
+
+                output = cNumber;
+
                 while(!operation.isEmpty() && operation.peek() !='('){
-                    output = output+value.pop();
                     if(operation.pop() =='-'){
                         output = output*-1;
                     }
+                    output = output+value.pop();
+
                 }
                 value.push(output);
 
@@ -43,15 +50,23 @@ public class Day5Problem1 {
                 value.push(cNumber);
             }
         }
+
         System.out.println(value);
         System.out.println(operation);
         while(!operation.isEmpty() && operation.peek() !='('){
+
+            System.out.println(output);
+            System.out.println(value);
+            System.out.println(operation);
+
             output = output+value.pop();
             if(operation.pop() =='-'){
                 output = output*-1;
             }
-        }
 
+        }
+        System.out.println(value);
+        output+=value.pop();
         return output;
     }
 }
