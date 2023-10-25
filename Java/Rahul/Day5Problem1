@@ -1,0 +1,57 @@
+import java.util.Stack;
+
+public class Day5Problem1 {
+    public static void main(String[] args){
+        String expression = "2183 - (612 + 499) + 137";
+        System.out.println( calculator(expression));
+    }
+
+    private static int calculator(String expression) {
+        Stack<Integer> value = new Stack<>();
+        Stack<Character> operation = new Stack<>();
+        int output=0;
+        int cNumber=0;
+
+        for(int i = 0;i<expression.length();i++){
+            if(Character.isDigit(expression.charAt(i))){
+                cNumber = cNumber*10 + Character.getNumericValue(expression.charAt(i));
+            } else if (expression.charAt(i) =='+') {
+                value.push(cNumber);
+                operation.push(expression.charAt(i));
+                cNumber =0;
+            } else if(expression.charAt(i) == '-'){
+                value.push(cNumber);
+                operation.push(expression.charAt(i));
+                cNumber =0;
+            } else if (expression.charAt(i) =='(') {
+                operation.push(expression.charAt(i));
+            } else if (expression.charAt(i) ==')') {
+                value.push(cNumber);
+                while(!operation.isEmpty() && operation.peek() !='('){
+                    output = output+value.pop();
+                    if(operation.pop() =='-'){
+                        output = output*-1;
+                    }
+                }
+                value.push(output);
+
+                operation.pop();
+                output =0;
+                cNumber =0;
+            }
+            if(i == expression.length()-1){
+                value.push(cNumber);
+            }
+        }
+        System.out.println(value);
+        System.out.println(operation);
+        while(!operation.isEmpty() && operation.peek() !='('){
+            output = output+value.pop();
+            if(operation.pop() =='-'){
+                output = output*-1;
+            }
+        }
+
+        return output;
+    }
+}
