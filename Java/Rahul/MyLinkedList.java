@@ -25,7 +25,7 @@ public class MyLinkedList {
     public void add(int in){
         if(size ==0){
            this.head =  new Node(in);
-           this.tail = new Node(in);
+           this.tail = this.head;
         }
         else{
             Node n = new Node(in);
@@ -88,6 +88,7 @@ public class MyLinkedList {
             nw = nw.next;
             lp++;
         }
+        return -1;
     }
 
 }
