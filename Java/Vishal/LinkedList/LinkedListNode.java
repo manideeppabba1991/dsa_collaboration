@@ -25,6 +25,22 @@ public class LinkedListNode {
         head = inputNode;
     }
 
+
+    public LinkedListNode reverseLinkedList(LinkedListNode head) { 1->2->3->4->null
+
+	    Node prev = null;
+	    Node curr = head;
+
+	    Node temp;
+	    while (curr != null) {
+           	temp = curr.next							  
+	       curr.next = prev;
+	      prev = curr;	
+	      curr = temp;   
+	    }
+	    return prev;
+    }
+
     public void insertAtIndex(int index, int inputValue) {
 
         Node inputNode = new Node();
