@@ -60,6 +60,81 @@ public class MyLinkedList {
         } else {
             throw new IndexOutOfBoundsException();
         }
+    }
 
+    public Integer getMiddle() {
+        Node slow = new Node(0);
+        Node fast = new Node(0);
+        if(head.getNext() != null) {
+            slow = head;
+            fast = head;
+        }
+        while(fast.getNext() != null && fast.getNext().getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+        return slow.getData();
+    }
+
+    public boolean detectCycle() {
+        Node slow = head;
+        Node fast = head;
+        while(fast.getNext() != null && fast.getNext().getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+            if(slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Day 6 - Problem 1
+    public Integer detectStartOfCycle() {
+        Node slow = head;
+        Node fast = head;
+        while(fast.getNext() != null && fast.getNext().getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+            if(slow == fast) {
+                Node start = head;
+                while(slow.getNext() != null) {
+                    if(start == slow) {
+                        return slow.getData();
+                    }
+                    start = start.getNext();
+                    slow = slow.getNext();
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        Node temp = head;
+        String result = "";
+        for(int i = 0; i < size(); i++) {
+            result += String.valueOf(temp.getData()) + " ";
+            temp = temp.getNext();
+        }
+
+        return "MyLinkedList{" +
+                "contents of linkedList=" + result +
+                ", size=" + size +
+                '}';
+    }
+
+    //Day 6 - Problem 2
+    public Node reverse(Node head) {
+        Node previous = null;
+        Node current = head;
+        while(current != null) {
+            Node temp = current.getNext();
+            current.setNext(previous);
+            previous = current;
+            current = temp;
+        }
+        return previous;
     }
 }
