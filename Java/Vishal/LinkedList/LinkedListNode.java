@@ -83,6 +83,59 @@ public class LinkedListNode {
         System.out.println(node.input);
     }
 
+    public int findMiddle() {
+	
+	    Node slowNode = head;
+	    Node fastNode = head;
+
+	    while(fast.next != null && fast.next.next != null) {
+		    slow = slow.next;
+		    fast = fast.next.next;
+	    }
+	    return slow.input;
+    }
+
+    public Boolean detectCycle(LinkedListNode head) {
+	
+	    LinkedListNode slow = head;
+	    LinkedListNode fast = head;
+	
+	    while(fast.next != null && fast.next.next !=null) {
+		    slow = slow.next;
+		    fast = fast.next.next;
+		    if(slow == fast) {
+			    return true;
+		    }
+	    }
+	    return false;	
+    }
+
+    public int returnFirstElementInLoop(LinkedListNode head) {
+        LinkedListNode slow = head;
+	    LinkedListNode fast = head;
+        boolean isLoopExists = false;
+	
+	    while(fast.next != null && fast.next.next !=null) {
+		    slow = slow.next;
+		    fast = fast.next.next;
+		    if(slow == fast) {
+			    isLoopExists = true;
+                break;
+		    }
+	    }
+        if(isLoopExists = true) {
+            slow = head;
+            while(slow != fast) {
+                slow = slow.next;
+                fast = fast.next;
+            }
+            return slow;
+        }
+	    return null;
+    }
+
+    public void 
+
     public void remove(LinkedListNode linkedListNode, int index) {
         int curIndex=0;
         if(index == 0) {
