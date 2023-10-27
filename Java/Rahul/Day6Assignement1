@@ -61,4 +61,27 @@ public class Day6Assignement1 {
         }
         return null;
     }
+
+    public static LinkedListNode startCycleBetterTime(LinkedListNode input){
+        LinkedListNode slow = input;
+        LinkedListNode fast = input;
+        LinkedListNode start = input;
+        int counter =0;
+
+        while(fast.next!= null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                counter++;
+            }
+            if(counter >0){
+                if(slow ==start)
+                    return slow;
+                start =start.next;
+                counter++;
+                
+            }
+        }
+        return null;
+    }
 }
