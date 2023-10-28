@@ -41,6 +41,31 @@ public class LinkedListNode {
 	    return prev;
     }
 
+    pubilc void reverseLinkedFromIndex(int left, int right, Node head) { 1->2->3->4->5->6->7->null
+	    int left = 1;
+	    int right = 5;
+	    int curIndex= 0;
+	    Node leftPart = head;
+	    while (curIndex <= left) {
+		    laftPart = leftPart.next;
+		    curIndex++;
+	    }
+	    Node rightPart = leftPart;							
+	    while(currIndex <= right) {
+		rightPart = rightPart.next;
+		curIndex++;
+	    }
+	    Node temp;
+            while(left != null) {
+		    temp = leftPart.next;
+		    leftPart.next = rightPart;
+		    rightPart = leftPart;
+		    leftPart = temp;
+		    
+	    }									
+	    
+    }
+
     public void insertAtIndex(int index, int inputValue) {
 
         Node inputNode = new Node();
