@@ -62,6 +62,21 @@ public class MyLinkedList {
         }
     }
 
+    public Node getNode(int index) {
+        if (index == 0) {
+            return head;
+        }
+        if (index > 0 && index < size) {
+            Node current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.getNext();
+            }
+            return current;
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
     public Integer getMiddle() {
         Node slow = new Node(0);
         Node fast = new Node(0);
@@ -121,6 +136,13 @@ public class MyLinkedList {
 
         return "MyLinkedList{" +
                 "contents of linkedList=" + result +
+                ", size=" + size +
+                '}';
+    }
+
+    public String toStringFullDetails() {
+        return "MyLinkedList{" +
+                "head=" + head +
                 ", size=" + size +
                 '}';
     }
