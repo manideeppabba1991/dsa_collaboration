@@ -1,0 +1,60 @@
+public class MyQueeUsingLinkedList {
+    public QNode head;
+    public QNode tail;
+
+    public int size;
+
+    public MyQueeUsingLinkedList(){
+        this.head = null;
+        this.tail = null;
+        this.size =0;
+    }
+    public void add(String in){
+        if(this.size == 0){
+            this.head = new QNode(in);
+            this.tail = this.head;
+        }else{
+            this.tail.next = new QNode(in);
+            this.tail = this.tail.next;
+        }
+        this.size++;
+    }
+
+    public String pop(){
+        if(this.size == 0)
+            return null;
+        QNode ret = this.head;
+        this.head = this.head.next;
+        this.size--;
+        if(this.size ==1)
+            this.tail = this.head;
+
+        return ret.value;
+    }
+
+    public String peek(){
+        if(this.size == 0)
+            return null;
+        return this.head.value;
+    }
+
+    public int size(){
+        return this.size;
+    }
+
+    public boolean isEmpty(){
+        return this.size==0;
+    }
+
+}
+
+class QNode{
+    String value;
+    QNode next;
+
+    QNode(String v){
+        this.value = v;
+        this.next = null;
+    }
+
+}
