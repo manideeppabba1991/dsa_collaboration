@@ -1,0 +1,59 @@
+public class MyStackLinked {
+    public Node tail;
+
+    public int size;
+
+    public MyStackLinked(){
+        this.tail = null;
+        this.size = 0;
+    }
+
+    public void push(int v){
+        if(this.size ==0){
+            this.tail = new Node(v);
+        }
+        Node old = this.tail;
+        this.tail = new Node(v);
+        this.tail.prev = old;
+        this.size++;
+    }
+
+    public Node pop(){
+        if(size == 0)
+            return null;
+
+        Node ret = this.tail;
+        this.tail = this.tail.prev;
+        ret.prev = null;
+        this.size--;
+        return ret;
+
+    }
+
+    public boolean isEmpty(){
+        return this.size ==0;
+    }
+
+    public int size(){
+        return this.size;
+    }
+
+    public Node peek(){
+        if(size == 0)
+            return null;
+
+        return this.tail;
+    }
+
+}
+
+class Node{
+    int value;
+    Node prev;
+
+    Node(int v){
+        this.value = v;
+        this.prev = null;
+    }
+
+}
