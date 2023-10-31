@@ -3,29 +3,32 @@ public class MinStack {
     Node minNode;
     int size;
 
+    int minValue;
+
     public MinStack() {
         head = null;
         minNode = null;
         size = 0;
+        minValue = 0;
     }
 
     public void push(int data) {
-        if (this.size == 0 || head == null) {
-            this.head = new Node(data);
-            this.minNode = new Node(data);
-        }
         Node newNode = new Node(data);
+        if (this.size == 0 || head == null) {
+            this.head = newNode;
+            this.minNode = newNode;
+            minValue = data;
+        }
         newNode.next = head;
         head = newNode;
         this.size++;
-        Node tempNewNode = newNode;
-        if(tempNewNode.data < minNode.data) {
-            Node temp = minNode;
-            tempNewNode.next = minNode;
-            minNode = tempNewNode;
-        } else {
-            minNode.next = tempNewNode;
+        
+        if(data < minValue) {
+            minValue = data;
         }
+        Node temp = new Node(minValue);
+        temp.next = minNode;
+        minNode = temp;
     }
 
     public Node pop() {
@@ -35,9 +38,10 @@ public class MinStack {
         Node result = this.head;
         this.head = this.head.next;
         size--;
-        if(result.data == minNode.data) {
-            minNode = minNode.next;
-        }
+
+        Node minResult = this.minNode;
+        this.minNode = this.minNode.next;
+
         return result;
     }
 

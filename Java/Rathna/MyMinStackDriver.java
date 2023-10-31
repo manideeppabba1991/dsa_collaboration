@@ -42,15 +42,21 @@ public class MyMinStackDriver {
         minStack4.push(12);
         minStack4.push(-9);
         minStack4.push(6);
-        System.out.println(minStack4.size());
-        System.out.println(minStack4.pop());
-        System.out.println(minStack4.size());
-        System.out.println(minStack4.pop());
-        System.out.println(minStack4.size());
-        System.out.println(minStack4.pop());
-        System.out.println(minStack4.size());
-        System.out.println(minStack4.pop());
-        System.out.println(minStack4.size());
+        System.out.println("Min Value: " + minStack4.minNumber());
+        System.out.println("Size: " + minStack4.size());
+        System.out.println("Main Stack pop: " + minStack4.pop());
+        System.out.println("Min Value: " + minStack4.minNumber());
+        System.out.println("Size: " + minStack4.size());
+        System.out.println("Main Stack pop: " + minStack4.pop());
+        System.out.println("Min Value: " + minStack4.minNumber());
+        System.out.println("Size: " + minStack4.size());
+        System.out.println("Main Stack pop: " + minStack4.pop());
+        System.out.println("Min Value: " + minStack4.minNumber());
+        System.out.println("Size: " + minStack4.size());
+        System.out.println("Main Stack pop: " + minStack4.pop());
+        System.out.println("Min Value: " + minStack4.minNumber());
+        System.out.println("Size: " + minStack4.size());
+        System.out.println("Main Stack pop: " + minStack4.pop());
 
     }
 }
