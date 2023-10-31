@@ -1,0 +1,21 @@
+public void ReverseWords() {
+        String inputSentence = "How are you";
+        String[] arr = inputSentence.split(" ");
+        int left=0;
+        int right = arr.length-1;
+        String temp;
+        String output = "";
+
+        while (left < right) {
+            temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
+        }
+        for(int i = 0; i<arr.length; i++) {
+            output += arr[i] + " ";
+        }
+        System.out.println(output);
+        
+    }

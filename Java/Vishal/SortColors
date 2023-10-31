@@ -1,0 +1,26 @@
+public void sortColors() {
+        int[] input = new int[] {2,0,2,1,2,1};
+
+        int left = 0;
+        int right = input.length-1;
+        int tp=0;
+        int temp;
+
+        while (tp <= right) {
+            if(input[tp] == 2) {
+                temp = input[tp];
+                input[tp] = input[right];
+                input[right] = temp;
+                right--;
+            } else if(input[tp] == 1) {
+                tp++;
+            } else {
+                temp = input[tp];
+                input[tp] = input[left];
+                input[left] = temp;
+                left++;
+                tp++;
+            }
+        }
+        System.out.println(input);
+    }
