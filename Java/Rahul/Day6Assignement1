@@ -1,0 +1,87 @@
+//time = o(n2)
+//space == constant
+
+public class Day6Assignement1 {
+
+
+    public static  void main(String[] args){
+
+        LinkedListNode in1 = new LinkedListNode(10);
+        LinkedListNode in2 = new LinkedListNode(20);
+        LinkedListNode in3 = new LinkedListNode(30);
+        LinkedListNode in4 = new LinkedListNode(40);
+        LinkedListNode in5 = new LinkedListNode(50);
+        LinkedListNode in6 = new LinkedListNode(60);
+        LinkedListNode in7 = new LinkedListNode(70);
+        LinkedListNode in8 = new LinkedListNode(80);
+        in1.next = in2;
+        in2.next = in3;
+        in3.next = in4;
+        in4.next = in5;
+        in5.next = in6;
+        in6.next = in7;
+        in7.next = in8;
+        in8.next = in4;
+
+        System.out.println(findCyclic(in1));
+
+        LinkedListNode out = startCycle(in1);
+        System.out.println(out.data);
+
+    }
+    public static boolean findCyclic(LinkedListNode input){
+        LinkedListNode slow = input;
+        LinkedListNode fast = input;
+
+        while(fast.next!= null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast)
+                return true;
+        }
+        return false;
+    }
+
+    public static LinkedListNode startCycle(LinkedListNode input){
+        LinkedListNode slow = input;
+        LinkedListNode fast = input;
+
+        while(fast.next!= null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                LinkedListNode start = input;
+                while(slow.next!= null){
+                    if(slow ==start)
+                        return slow;
+                    slow =slow.next;
+                    start =start.next;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static LinkedListNode startCycleBetterTime(LinkedListNode input){
+        LinkedListNode slow = input;
+        LinkedListNode fast = input;
+        LinkedListNode start = input;
+        int counter =0;
+
+        while(fast.next!= null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                counter++;
+            }
+            if(counter >0){
+                if(slow ==start)
+                    return slow;
+                start =start.next;
+                counter++;
+                
+            }
+        }
+        return null;
+    }
+}

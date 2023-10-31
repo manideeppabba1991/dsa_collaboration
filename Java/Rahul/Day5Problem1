@@ -1,0 +1,63 @@
+//https://www.educative.io/courses/grokking-coding-interview-patterns-java/basic-calculator
+//time complexity = o(n)
+//space complexity = o(n)
+import java.util.Stack;
+
+public class Day5Problem1 {
+    public static void main(String[] args){
+        String expression = "(18 - 11 - (27 + 8 - 14) + 37)";
+        System.out.println( basicCalc(expression));
+    }
+    
+    public static int basicCalc(String in){
+        Stack<Double> store = new Stack<>();
+        double cur =0;
+        int symbol = 1;//positive as 1
+        for(int i=0;i<in.length();i++){
+            //"2183 - (12+13) + 137";
+            if(Character.isDigit(in.charAt(i))){
+                cur = cur*10+ Character.getNumericValue(in.charAt(i)); //
+            }else if(in.charAt(i) == '+'){
+                store.push(cur*symbol);//
+                cur =0;
+                symbol =1;
+
+            }else if(in.charAt(i) == '-'){
+                store.push(cur*symbol);//
+                cur =0;
+                symbol =-1;
+            }else if(in.charAt(i)=='('){
+                if(symbol ==-1){
+                    store.push(Double.NEGATIVE_INFINITY);
+                }else{
+                    store.push(Double.POSITIVE_INFINITY);
+                }
+                symbol = 1;
+
+            }else if(in.charAt(i)==')'){
+                double out = cur*symbol;
+                symbol =1;
+
+                //"2183 - (12+13) + 137";
+                while(!store.isEmpty() && store.peek() != Double.NEGATIVE_INFINITY && store.peek() != Double.POSITIVE_INFINITY){
+                    out+= store.pop();
+                    if(store.peek() == Double.NEGATIVE_INFINITY )
+                        out = -1*out;
+
+                }
+                store.pop();
+                cur = out;
+            }
+        }
+
+        if(cur >0){
+            store.push(cur*symbol);
+        }
+        int result =0;
+        while(!store.isEmpty()){
+            result+= store.pop();
+        }
+
+        return  result;
+    }
+}
