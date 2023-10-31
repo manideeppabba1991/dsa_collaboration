@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class IsValidParenthesis {
     public static void main(String[] args) {
@@ -7,8 +8,34 @@ public class IsValidParenthesis {
         String inputStr = scan.next();
         System.out.println("Contents of input string: " + inputStr);
         IsValidParenthesis(inputStr);
+        boolean bool = IsValidParenthesisUsingStack(inputStr);
+        if(bool) {
+            System.out.println("Good Input");
+        } else {
+            System.out.println("Bad Input");
+        }
         scan.close();
     }
+
+    private static boolean IsValidParenthesisUsingStack(String inputStr) {
+        Stack<Character> stack = new Stack<>();
+        for(int i = 0; i < inputStr.length(); i++) {
+            if(inputStr.charAt(i) == '(' || inputStr.charAt(i) == '{' || inputStr.charAt(i) == '[') {
+                stack.push(inputStr.charAt(i)); // SC = O(n), TC = (n)
+            }
+            else {
+                char poppedValue = stack.pop();
+                if((inputStr.charAt(i) == ')' && poppedValue != '(') ||
+                        (inputStr.charAt(i) == '}' && poppedValue != '{') ||
+                        (inputStr.charAt(i) == ']' && poppedValue != '[')) {
+                    return false;
+                }
+            }
+        }
+        return stack.size() == 0;
+    }
+
+
     private static void IsValidParenthesis(String inputStr) {
 
         if(inputStr.length() > 1 && inputStr.length() <= 104 && inputStr.length() % 2 == 0)
