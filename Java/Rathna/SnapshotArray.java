@@ -20,15 +20,15 @@ public class SnapshotArray {
         snapArray[idx] = state;
     }
 
-    // This function takes no parameters and returns the snapid.
-    // snapid is the number of times that the snapshot() function was called minus 1.
+    // This function takes no parameters and returns the snapId.
+    // snapId is the number of times that the snapshot() function was called minus 1.
     public int snapshot() {
-        myHashMap.put(snapId, snapArray);
+        myHashMap.put(snapId, snapArray.clone());
         snapId++;
         return snapId - 1;
     }
 
-    // Function getValue returns the value at the index idx with the given snapid.
+    // Function getValue returns the value at the index idx with the given snapId.
     public int getValue(int idx, int snapshotId1) {
         int[] resultArray = myHashMap.get(snapshotId1);
         return resultArray[idx];
