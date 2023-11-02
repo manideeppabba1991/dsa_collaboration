@@ -1,9 +1,15 @@
 //https://leetcode.com/problems/maximum-subarray/description/
+//time = o(n)
+//space = constant
 
 public class MaxSubArray {
 
     public static void main(String[] args){
         int[] in = new int[]{-2,1,-3,4,-1,2,1,-5,4};
+        System.out.println(maxSubArray(in));
+    }
+
+     public int maxSubArray(int[] in) {
         int sumCurMax =in[0];
         int actaulMax =in[0];
 
@@ -13,8 +19,7 @@ public class MaxSubArray {
             actaulMax = Math.max(sumCurMax,actaulMax);
 
         }
-
-        System.out.println(actaulMax);
+        return actaulMax;
     }
 
 }
