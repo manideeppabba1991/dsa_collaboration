@@ -4,20 +4,17 @@ public class MaxSubArray {
 
     public static void main(String[] args){
         int[] in = new int[]{-2,1,-3,4,-1,2,1,-5,4};
-        int previousMax =0;
-        int sum =0;
-        int max =0;
-        //Stack<Integer> res = new Stack<>();
+        int sumCurMax =in[0];
+        int actaulMax =in[0];
 
-        for(int i=0; i<in.length;i++){
-            sum += in[i];
-            if(sum>max)
-                max = sum;
-            if(in[i]>max)
-                max = in[i];
+        for(int i=1; i<in.length;i++){
+            sumCurMax += in[i];
+            sumCurMax= Math.max(sumCurMax,in[i]);
+            actaulMax = Math.max(sumCurMax,actaulMax);
+
         }
 
-        System.out.println(max);
+        System.out.println(actaulMax);
     }
 
 }
