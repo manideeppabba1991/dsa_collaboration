@@ -20,7 +20,6 @@ public class ThreeSum {
         List<List<Integer>> opt=new ArrayList<>();
         //iterating through
         for(int i = 0; i< in.length-2; i++){//n2
-            int[] dest = new int[in.length-1];
             opt.addAll(twoSum(in,i+1, target - in[i], in[i])); // n
         }
         return opt;
