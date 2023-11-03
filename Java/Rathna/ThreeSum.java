@@ -7,20 +7,13 @@ public class ThreeSum {
     public static void main(String[] args) {
         int[] arr = {-1, 2, 4, 0, 3, 5, -2};
         int target = 4;
-        // 5, -1 , 0 ==> 2,3,-1 ==>
+        // Expected output: 5, -1 , 0 ==> 2, 3, -1 ==> 2, -2, 4
 
-        //-2, -1, 0, 2, 3, 4, 5
-
-        // left = a[0] ---> newTarget = target - a[0] ---> newArr = a[1-(length-1)]
         //sort given array asc
-        //loop through and get current index and find twoSum of currentIndex + 1 and target = target - curr Index
+        //loop through and get current index and find twoSum of currentIndex + 1 and newTarget = target - curr Index
         //simplify twoSum method and solve it
 
         // complete this program, follow-up: duplicates
-        //Step1: sort // TC = O(nlogn)
-        //Ste2: iterate
-
-
 
         Arrays.sort(arr); //Java uses DualPivotQuicksort, TC = O(n log(n))
         List<List<Integer>> opt = new ArrayList<>();
