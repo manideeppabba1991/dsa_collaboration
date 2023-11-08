@@ -1,0 +1,97 @@
+package HashMapImp;
+
+import java.util.HashMap;
+
+public class HashMapProblems {
+
+    public char[] mostFrequentChar() {
+        String input = "aaabbbbccccc";
+        char[] result = new char[input.length()];
+        HashMap<Character, Integer> map = new HashMap<>();
+        int max =1;
+        for(int i = 0; i < input.length(); i++) {
+            char key = input.charAt(i);
+            if(map.containsKey(key)) {
+                map.replace(key, map.get(key), map.get(key)+1);
+                max = Math.max(max, map.get(key));
+            } else {
+                map.put(key, 1);
+            }
+        }
+        int i = 0;
+        for (char k: map.keySet()) {
+            if(map.get(k) == max) {
+                result[i] = k;
+                i++;
+            }
+        }
+        return result;
+    }
+
+
+    public boolean isAnagram() {
+        String str1 = "kklo";
+        String str2 = "oilk";
+
+        if(str1.length() != str2.length()) {
+            return false;
+        }
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(int i=0; i < str1.length(); i++) {
+            char key = str1.charAt(i);
+            if(map.containsKey(key)) {
+                map.replace(key, map.get(key), map.get(key)+1);
+            } else {
+                map.put(key, 1);
+            }
+        }
+        for(int i = 0; i<str2.length(); i++) {
+            char key = str2.charAt(i);
+            if(map.containsKey(key) && map.get(key) >1) {
+                map.replace(key, map.get(key), map.get(key)-1);
+            } else {
+                map.remove(key);
+            }
+        }
+        return map.isEmpty();
+    }
+
+    public boolean isIntAnagram() {
+        int input1 = 12345;
+        int input2 = 54321;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        do {
+            map.put(input1 % 10, 1);
+            input1 /= 10;
+        } while (input1 > 0);
+        return false;
+    }
+
+    public int longestPalindromicLength() {
+        String input = "aaabbbccc";
+        int result = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(int i=0; i < input.length(); i++) {
+            char key = input.charAt(i);
+            if(map.containsKey(key)) {
+                map.replace(key, map.get(key), map.get(key)+1);
+            } else {
+                map.put(key, 1);
+            }
+        }
+        for(Character key: map.keySet()) {
+            int value = map.get(key);
+            if(value > 1) {
+                if(value%2==0) {
+                    result = result + value;
+                } else {
+                    result = result + (value-1);
+                }
+            }
+        }
+        if(result == input.length()) {
+            return result;
+        } else return result +1;
+    }
+}
