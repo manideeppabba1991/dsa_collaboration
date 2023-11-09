@@ -39,7 +39,7 @@ public class Anagram {
         linkedList.add(20);
         linkedList.add(30);
         linkedList.add(40);
-        System.out.println(linkedList);
+        System.out.println("Before reversing: " + linkedList);
         //Reverse linked list when linkedList is passed
         reverseLinkedList(linkedList);
 
@@ -51,10 +51,40 @@ public class Anagram {
         head.setNext(n2);
         n2.setNext(n3);
         n3.setNext(n4);
-        System.out.println(head.toString());
+        System.out.println("Node list before reversing: " + head.toString());
         //Reverse linked list when head is passed
         reverseMyLinkedListUsingHead(head);
 
+        Node newHead = new Node(100);
+        Node m2 = new Node(200);
+        Node m3 = new Node(300);
+        Node m4 = new Node(400);
+
+        newHead.setNext(m2);
+        m2.setNext(m3);
+        m3.setNext(m4);
+        System.out.println("Node list before reversing: " + newHead.toString());
+
+        //Swap node values in linkedList when head is passed
+        Node reverse = swapNodesInLinkedList(newHead, m2, m3);
+        System.out.println("After reversing: " + reverse.toString());
+
+    }
+
+    //Swap node values in linkedList when head is passed
+    private static Node swapNodesInLinkedList(Node head, Node n2, Node n3) {
+        Node current = head;
+        int node2Data = n2.getData();
+        int node3Data = n3.getData();
+        while(current != null) { // TC = O(n) and SC = O(1)
+            if(current == n2) {
+                current.setData(node3Data);
+            } else if(current == n3) {
+                current.setData(node2Data);
+            }
+            current = current.getNext();
+        }
+        return head;
     }
 
     //Reverse string without built-in functions, used StringBuilder
@@ -77,7 +107,7 @@ public class Anagram {
             previous = current;
             current = temp;
         }
-        System.out.println(previous.toString());
+        System.out.println("Node linkedList after reversing: " + previous.toString());
     }
 
     //Reverse linked list when linkedList is passed
@@ -93,7 +123,7 @@ public class Anagram {
             left++;
             right--;
         }
-        System.out.println(linkedList);
+        System.out.println("Reversed LinkedList: " + linkedList);
     }
 
     //Reverse string without built-in functions
