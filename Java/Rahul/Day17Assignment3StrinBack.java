@@ -1,4 +1,5 @@
 //https://leetcode.com/problems/backspace-string-compare/submissions/
+//TC = O(n) , space =O(n) 2n
 class Solution {
     public boolean backspaceCompare(String s, String t) {
         Stack<Character> s1 = new Stack<>(); 
