@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class RotateRightInLinkedList {
     public static void main(String[] args) {
         ListNode head = new ListNode(10);
@@ -11,8 +13,10 @@ public class RotateRightInLinkedList {
         n3.next = n4;
         n4.next = null;
         System.out.println(head);
-        int kTimes = 6;
-        ListNode rotatedList = rotateRightKTimes(head, kTimes);
+        int kTimes = 5;
+        /*ListNode rotatedList = rotateRightKTimes(head, kTimes);
+        System.out.println(rotatedList.toString());*/
+        ListNode rotatedList = rotateKTimesRight(head, kTimes);
         System.out.println(rotatedList.toString());
     }
 
@@ -26,10 +30,9 @@ public class RotateRightInLinkedList {
         if(size == 0) {
             return head;
         }
-
         current = head;
         ListNode previous = null;
-        for (int i = 1; i <= kTimes % size; i++) {
+        for (int i = 1; i <= kTimes % size; i++) { //TC = O(n * k)
             while (current != null) {
                 if (current.next == null) {
                     previous.next = current.next;
@@ -41,6 +44,42 @@ public class RotateRightInLinkedList {
                 current = current.next;
             }
         }
+        return head;
+    }
+
+    private static ListNode rotateKTimesRight(ListNode head, int k) {
+        if(head == null || head.next == null || k == 0) {
+            return head;
+        }
+
+        ListNode temp = head;
+        ListNode last = null;
+        int size = 0; // 1->2->3->4->5->null
+        while(temp != null) {
+           last = temp;
+           size++;
+           temp = temp.next;
+        }
+        if(k % size == 0) {
+            return head;
+        }
+
+        // last = 5->null
+        // k = 3
+        int splitNode = size - (k % size);
+        // splitNode = (5-3) % 5 = 2
+
+        ListNode current = head;
+        ListNode previous = null;
+        // head = 1->2->3->4->5->null
+        for(int i = 1; i < splitNode; i++) {
+            current = current.next;
+        }
+        ListNode nextNode = current.next;
+        current.next = null;
+        last.next = head;
+        head = nextNode;
+
         return head;
     }
 }

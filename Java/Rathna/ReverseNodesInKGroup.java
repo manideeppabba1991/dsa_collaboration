@@ -12,8 +12,42 @@ public class ReverseNodesInKGroup {
         n4.next = null;
         System.out.println("Before reversing: " + head);
         int k = 2;
-        ListNode result = reverseKGroup(head, k);
+        ListNode result = reverseKGroupNew(head, k);
         System.out.println("After reversing: " + result);
+    }
+
+    private static ListNode reverseKGroupNew(ListNode head, int k) {
+        ListNode current = head;
+        int length = 0;
+        while(current != null) {
+            length++;
+            current = current.next;
+        }
+
+        int groups = length/k; // 5/2 = 2
+        current = head; //1-2-3-4-5-null
+        ListNode tailOfPreviousGroup = null;
+        while(groups > 0) { //TC = O(n) and SC = O(1)
+            ListNode headOfCurrentGroup = current; //3-4-5-null
+            int tempK = k;
+            ListNode previous = null;
+            while(tempK > 0) {
+                ListNode nextNode = current.next; //5-null
+                current.next = previous; //4-3-null
+                previous = current; // 4-3-null
+                current = nextNode; //5-null   ===2-1-4-3
+                tempK--;
+            }
+            headOfCurrentGroup.next = current;
+            if(tailOfPreviousGroup == null) {
+                head = previous;
+            }else {
+                tailOfPreviousGroup.next = previous;
+            }
+            tailOfPreviousGroup = headOfCurrentGroup;
+            groups--;
+        }
+        return head;
     }
 
     private static ListNode reverseKGroup(ListNode head, int k) {
@@ -29,7 +63,7 @@ public class ReverseNodesInKGroup {
             current = current.next;
             size++;
         }
-        //define previous and current pointers
+        //define previous, current and next pointers
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
 

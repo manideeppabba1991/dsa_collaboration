@@ -20,7 +20,7 @@ public class BackSpaceStringCompare {
 
     private static String traverseString(String str) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
+        for (int i = 0; i < str.length(); i++) { // TC = O(n) and SC = O(n)
             Character c = str.charAt(i);
             if (c.equals('#')) {
                 stringBuilder.delete(i - 1, stringBuilder.length());
