@@ -1,3 +1,4 @@
+
 class Solution {
     public int[][] intervalIntersection(int[][] intervalA, int[][] intervalB) {
         int left =0;
