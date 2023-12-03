@@ -1,0 +1,83 @@
+//https://leetcode.com/problems/employee-free-time/
+// using mergsort
+/*
+// Definition for an Interval.
+class Interval {
+    public int start;
+    public int end;
+
+    public Interval() {}
+
+    public Interval(int _start, int _end) {
+        start = _start;
+        end = _end;
+    }
+};
+*/
+
+
+//Merge all the lists and make one single list
+//Merge Intervals and make a new newList
+//extract the free time based off the difference
+class Solution {
+    public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
+
+        List<Interval> mergeSorted = mergeList(schedule);
+
+        Interval previous = mergeSorted.get(0);
+        List<Interval> freeTimes = new ArrayList<>();
+
+        for(int i =0 ;i< mergeSorted.size();i++){
+            Interval current = mergeSorted.get(i);
+
+            if(current.start <= previous.end && previous.start <= current.end ){
+                previous.start = Math.min(current.start, previous.start);
+                previous.end = Math.max(current.end, previous.end);
+            }else{
+                Interval temp = new Interval();
+                temp.start = previous.end;
+                temp.end = current.start;
+                freeTimes.add(temp);
+                previous = current;
+            }
+        }
+        return freeTimes;
+    }
+    private static List<Interval> mergeList(List<List<Interval>> schedule) {
+        if(schedule.size()==1)
+            return schedule.get(0);
+        int mid = schedule.size()/2;
+        List<Interval> leftList = mergeList(schedule.subList(0,mid));
+        List<Interval> rightList = mergeList(schedule.subList(mid,schedule.size()));
+
+        return mergeSortList(leftList,rightList);
+
+    }
+
+    private static List<Interval> mergeSortList(List<Interval> leftList, List<Interval> rightList) {
+        int left =0;
+        int right =0;
+        List<Interval> merged = new ArrayList<>();
+        while(left<leftList.size() && right< rightList.size()){
+            if(leftList.get(left).start < rightList.get(right).start){
+                merged.add(leftList.get(left));
+                left++;
+            }else{
+                merged.add(rightList.get(right));
+                right++;
+            }
+        }
+
+        while(left<leftList.size()){
+            merged.add(leftList.get(left));
+            left++;
+        }
+
+        while(right< rightList.size()){
+            merged.add(rightList.get(right));
+            right++;
+        }
+
+        return merged;
+    }
+}
