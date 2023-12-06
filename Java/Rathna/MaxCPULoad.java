@@ -4,11 +4,11 @@ import java.util.Comparator;
 public class MaxCPULoad {
     public static void main(String[] args) {
         int[][] jobs = {{1,4,3}, {2,5,4}, {7,9,6}, {3,6,5}};
-        int maxCPUUsage = FindMaxCPUUsage(jobs);
+        int maxCPUUsage = findMaxCPUUsage(jobs);
         System.out.println("Max CPU: " + maxCPUUsage);
     }
 
-    private static int FindMaxCPUUsage(int[][] jobs) {
+    private static int findMaxCPUUsage(int[][] jobs) {
         int size = jobs.length;
         Arrays.sort(jobs, Comparator.comparing(value -> value[0])); // For sorting
         //{{1,4,3}, {2,5,4}, {3,6,5}, {7,9,6}};
