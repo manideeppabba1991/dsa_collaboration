@@ -14,7 +14,7 @@ public class BinarySearchTree {
 
     }
 
-    private static BinarySearchTree.TreeNode searchBST(BinarySearchTree.TreeNode root, int val) {
+    private static TreeNode searchBST(TreeNode root, int val) {
         // break/base conditions
         if (root == null) {
             return null;
@@ -28,29 +28,29 @@ public class BinarySearchTree {
             return searchBST(root.left, val);
         }
     }
+}
 
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
 
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-
-        @Override
-        public String toString() {
-            return "TreeNode [val= " + val + ", \n left=" + left + ", \n right=" + right + "] \n";
-        }
-
+    TreeNode() {
     }
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public String toString() {
+        return "TreeNode [val= " + val + ", \n left=" + left + ", \n right=" + right + "] \n";
+    }
+
 }
