@@ -3,7 +3,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-
 public class BinarySearchTree {
     public static void main(String[] args) {
 
@@ -19,8 +18,120 @@ public class BinarySearchTree {
         System.out.println("Result: " + result);
 
         List<Integer> bfsResult = breadthFirstSearchApproach(root);
-        System.out.println("Breadth First Search Result: " + bfsResult);
+        System.out.println("Display tree: " + bfsResult);
 
+        List<List<Integer>> levelOrderResults = levelOrder(root);
+        System.out.println("Level Order Results: " + levelOrderResults);
+
+        List<Integer> rightSideResults = rightSideView(root);
+        System.out.println("Right side view Results: " + rightSideResults);
+
+        List<List<Integer>> zigzagLevelResults = zigzagLevelOrder(root);
+        System.out.println("Zig Zag level Results: " + zigzagLevelResults);
+
+    }
+
+    private static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        // base condition
+        if (root == null) {
+            return result;
+        }
+        Queue<TreeNode> treeQueue = new LinkedList<>();
+        treeQueue.add(root);
+
+        while (!treeQueue.isEmpty()) {
+            List<Integer> nodesAtEachLevel = new ArrayList<>();
+            int size = treeQueue.size();
+            while (size > 0) {
+                TreeNode currentTreeNode = treeQueue.remove();
+                nodesAtEachLevel.add(currentTreeNode.val);
+                if (currentTreeNode.left != null) {
+                    treeQueue.add(currentTreeNode.left);
+                }
+                if (currentTreeNode.right != null) {
+                    treeQueue.add(currentTreeNode.right);
+                }
+                size--;
+            }
+            int level = result.size();
+            if (level % 2 == 0) {
+                result.add(nodesAtEachLevel);
+            } else {
+                List<Integer> reversedNodesAtEachLevel = new ArrayList<>();
+                for (int i = nodesAtEachLevel.size() - 1; i >= 0; i--) {
+                    reversedNodesAtEachLevel.add(nodesAtEachLevel.get(i));
+                }
+                result.add(reversedNodesAtEachLevel);
+            }
+        }
+        return result;
+    }
+
+    private static List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+
+        // base condition
+        if (root == null) {
+            return result;
+        }
+
+        Queue<TreeNode> treeQueue = new LinkedList<>();
+        treeQueue.add(root);
+
+        while (!treeQueue.isEmpty()) {
+            List<Integer> nodesAtEachLevel = new ArrayList<>();
+            int size = treeQueue.size();
+            while (size > 0) {
+                TreeNode currTreeNode = treeQueue.remove();
+                nodesAtEachLevel.add(currTreeNode.val);
+                //System.out.println("Nodes at each level: " + nodesAtEachLevel.toString());
+                if (currTreeNode.left != null) {
+                    treeQueue.add(currTreeNode.left);
+                }
+                if (currTreeNode.right != null) {
+                    treeQueue.add(currTreeNode.right);
+                }
+                size--;
+            }
+            if (nodesAtEachLevel.size() > 0) {
+                result.add((nodesAtEachLevel.get(nodesAtEachLevel.size() - 1)));
+            }
+        }
+        return result;
+    }
+
+    private static List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        // base condition
+        if (root == null) {
+            return result;
+        }
+
+        Queue<TreeNode> treeQueue = new LinkedList<>();
+        treeQueue.add(root);
+
+        while (!treeQueue.isEmpty()) {
+            List<Integer> nodesAtEachLevel = new ArrayList<>();
+            int size = treeQueue.size();
+            while (size > 0) {
+                TreeNode currentTreeNode = treeQueue.remove();
+                nodesAtEachLevel.add(currentTreeNode.val);
+                if (currentTreeNode.left != null) {
+                    treeQueue.add(currentTreeNode.left);
+                }
+                if (currentTreeNode.right != null) {
+                    treeQueue.add(currentTreeNode.right);
+                }
+                size--;
+            }
+            if (!nodesAtEachLevel.isEmpty()) {
+                result.add(nodesAtEachLevel);
+            }
+        }
+        return result;
     }
 
     private static List<Integer> breadthFirstSearchApproach(TreeNode root) {
@@ -28,7 +139,7 @@ public class BinarySearchTree {
         List<Integer> result = new ArrayList<>();
         queue.add(root);
 
-        while (queue.size() != 0) {
+        while (!queue.isEmpty()) {
             TreeNode currentTreeNode = queue.remove();
             result.add(currentTreeNode.val);
             if (currentTreeNode.left != null) {
