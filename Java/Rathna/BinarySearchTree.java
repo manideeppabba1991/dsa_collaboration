@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 
 public class BinarySearchTree {
     public static void main(String[] args) {
@@ -12,6 +14,30 @@ public class BinarySearchTree {
         TreeNode Level1RightNode = new TreeNode(7);
         TreeNode root = new TreeNode(4, Level1LeftNode, Level1RightNode);
         System.out.println("My TreeNode: " + root);
+
+        List<Integer> preOrderOutput = new ArrayList<>();
+        List<Integer> preOrderTraversal = preOrder(root, preOrderOutput);
+        System.out.println("Pre-Order Traversal: " + preOrderTraversal);
+
+        List<Integer> inOrderOutput = new ArrayList<>();
+        List<Integer> inOrderTraversal = inOrder(root, inOrderOutput);
+        System.out.println("In-Order Traversal: " + inOrderTraversal);
+
+        List<Integer> postOrderOutput = new ArrayList<>();
+        List<Integer> postOrderTraversal = postOrder(root, postOrderOutput);
+        System.out.println("Post-Order Traversal: " + postOrderTraversal);
+
+        // hasPathSum --- https://leetcode.com/problems/path-sum/
+        int targetSum = 7;
+        boolean hasPathSum = hasPathSum(root, targetSum);
+        System.out.println("Is target sum achieved: " + hasPathSum);
+
+
+        // Used Set to remove duplicates (left & right nodes of leafnodes --- base condition) ---> sum from root to leaf
+        int sum = 0;
+        Set<Integer> output = new HashSet<Integer>();
+        output = sumFromRootToLeaf(root, sum, output);
+        System.out.println("Sum of all Root to Leaf nodes: " + output);
 
         int searchElement = 2;
         TreeNode result = searchBST(root, searchElement);
@@ -29,6 +55,72 @@ public class BinarySearchTree {
         List<List<Integer>> zigzagLevelResults = zigzagLevelOrder(root);
         System.out.println("Zig Zag level Results: " + zigzagLevelResults);
 
+    }
+
+    private static Set<Integer> sumFromRootToLeaf(TreeNode root, int sum, Set<Integer> output) {
+        //base condition
+        if(root == null) {  // TC = O(n) and SC = O(n) as recursive stack is being used
+            output.add(sum);
+        }
+
+        if(root != null) { 
+            sumFromRootToLeaf(root.left, sum + root.val, output);
+            sumFromRootToLeaf(root.right, sum + root.val, output);
+        }
+
+        return output;
+    }
+
+    private static boolean hasPathSum(TreeNode root, int targetSum) {
+        // base condition
+        if (root == null) {  // TC = O(n) and SC = O(n) as recursive stack is being used
+            return false;
+        }
+
+        if(root.left == null && root.right == null && targetSum == root.val) {
+            return true;
+        }
+
+        return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+    }
+
+    private static List<Integer> postOrder(TreeNode root, List<Integer> output) {
+          //base condition
+        if(root == null) { // TC = O(n) and SC = O(n) as recursive stack is being used
+            return null;
+        }
+
+        postOrder(root.left, output);        
+        postOrder(root.right, output);
+        output.add(root.val);
+
+        return output;
+    }
+
+    private static List<Integer> inOrder(TreeNode root, List<Integer> output) {
+         //base condition
+        if(root == null) { // TC = O(n) and SC = O(n) as recursive stack is being used
+            return null;
+        }
+
+        inOrder(root.left, output);
+        output.add(root.val);
+        inOrder(root.right, output);
+
+        return output;
+    }
+
+    private static List<Integer> preOrder(TreeNode root, List<Integer> output) {
+        //base condition
+        if(root == null) { // TC = O(n) and SC = O(n) as recursive stack is being used
+            return null;
+        }
+        output.add(root.val);
+
+        preOrder(root.left, output);
+        preOrder(root.right, output);
+
+        return output;
     }
 
     private static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
