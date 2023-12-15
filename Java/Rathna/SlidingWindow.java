@@ -2,7 +2,7 @@ import java.util.Stack;
 
 public class SlidingWindow {
 
-    // Sliding window is a design pattern followed to solve some kind of problems
+    // Sliding window is a coding pattern followed to solve some kind of problems
     // where target size is fixed such as sum of k consecutive elements in an array,
     // k length substrings possible repated chars (substring) in a given string (DNA
     // Seq), fruits into
